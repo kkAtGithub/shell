@@ -37,14 +37,6 @@ fi
 cp wgcf-profile.conf /etc/wireguard/wgcf.conf && \
 wg-quick up wgcf
 
-if [ "$MODE" == "--ipv4" ];then
-    curl -6 ip.p3terx.com
-fi
-
-if [ "$MODE" == "--ipv6" ];then
-    curl -4 ip.p3terx.com
-fi
-
 wg-quick down wgcf
 
 systemctl start wg-quick@wgcf && \
