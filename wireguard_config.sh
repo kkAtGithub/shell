@@ -22,7 +22,7 @@ curl -fsSL git.io/wgcf.sh | bash
 
 wgcf register && wgcf generate && \
 sed -i '/AllowedIPs = 0.0.0.0\/0/d' wgcf-profile.conf && \
-sed -i '/AllowedIPs = ::\/0/d' wgcf-profile.conf && \
+sed -i '/AllowedIPs = ::\/0/d' wgcf-profile.conf
 
 if [ "$MODE" == "--ipv4" ];then
     sed -i '/Endpoint = /i AllowedIPs = 0.0.0.0\/0' wgcf-profile.conf && \
