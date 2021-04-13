@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ $# -eq 0 ]; then
+    echo -e "e.g. ./iptables_config.sh -t port1,port2 -u port1,port2 -i ip_addr1,ip_addr2"
+    echo -e "./iptables_config.sh"
+    echo -e "\t\t\t-t tcp"
+    echo -e "\t\t\t-u udp"
+    echo -e "\t\t\t-i ip"
+    exit 0
+fi
+
+
 iptables -L
 ip6tables -L
 
@@ -12,7 +22,7 @@ ip6tables -A INPUT -p icmpv6 -j ACCEPT
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-while getopts ":t:u:i:h" optname
+while getopts ":t:u:i:" optname
 do
     case "$optname" in
       "t")
@@ -43,17 +53,17 @@ do
             fi
         done
         ;;
-      "h")
-        echo "Example: -t 22,80,443 (tcp) -u 53 (udp) -ip 127.0.0.1"
-        ;;
       ":")
         echo "No argument value for option $OPTARG"
+        exit 0
         ;;
       "?")
         echo "Unknown option $OPTARG"
+        exit 0
         ;;
       *)
         echo "Unknown error while processing options"
+        exit 0
         ;;
     esac
     # echo "option index is $OPTIND"
@@ -69,3 +79,5 @@ netfilter-persistent save || apt-get install iptables-persistent
 
 iptables -L
 ip6tables -L
+
+exit 0
