@@ -11,7 +11,7 @@
 [DEFAULT]
 
 # Put there localhost and IP addresses of server
-bantime  = 1y
+bantime  = -1
 findtime  = 600
 maxretry = 5
 #
