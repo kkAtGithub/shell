@@ -12,7 +12,7 @@
 
 # Put there localhost and IP addresses of server
 bantime  = -1
-findtime  = 600
+findtime  = 3600
 maxretry = 5
 #
 # ENABLED JAILS
