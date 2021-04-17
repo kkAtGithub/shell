@@ -11,22 +11,9 @@
 [DEFAULT]
 
 # Put there localhost and IP addresses of server
-ignoreip = 127.0.0.1/8
-
 bantime  = 1y
 findtime  = 600
 maxretry = 5
-backend = auto
-usedns = warn
-
 #
 # ENABLED JAILS
 #
-
-[ssh-iptables]
-
-enabled = true
-filter = sshd
-action = iptables[name=SSH, port=ssh, protocol=tcp]
-logpath = /var/log/messages
-maxretry = 5
