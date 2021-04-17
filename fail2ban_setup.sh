@@ -7,5 +7,6 @@ wget -O /etc/fail2ban/jail.local https://raw.githubusercontent.com/kkAtGithub/sh
 systemctl enable fail2ban && \
 systemctl restart fail2ban && \
 systemctl status fail2ban
+tail -f /var/log/fail2ban.log
 
 exit 0
