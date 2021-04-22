@@ -15,8 +15,8 @@ lsmod | grep wireguard
 apt update
 apt install curl lsb-release -y
 
-mkdir /root/wireguard
-cd /root/wireguard
+mkdir /root/wgcf
+cd /root/wgcf
 
 curl -fsSL git.io/wgcf.sh | bash
 
