@@ -25,18 +25,20 @@ sed -i '/AllowedIPs = 0.0.0.0\/0/d' wgcf-profile.conf && \
 sed -i '/AllowedIPs = ::\/0/d' wgcf-profile.conf
 
 if [ "$MODE" == "--ipv4" ];then
-    ip6tables -P FORWARD ACCEPT
+    iptables -P FORWARD ACCEPT
     sed -i '/Endpoint = /i AllowedIPs = 0.0.0.0\/0' wgcf-profile.conf && \
     sed -i 's/engage.cloudflareclient.com/[2606:4700:d0::a29f:c001]/' wgcf-profile.conf && \
     sed -i 's/DNS = 1.1.1.1/DNS = 2620:119:35::35,2001:4860:4860::8888,2606:4700:4700::1111/' wgcf-profile.conf
 fi
 
 if [ "$MODE" == "--ipv6" ];then
-    iptables -P FORWARD ACCEPT
+    ip6tables -P FORWARD ACCEPT
     sed -i '/Endpoint = /i AllowedIPs = ::\/0' wgcf-profile.conf && \
     sed -i 's/engage.cloudflareclient.com/162.159.192.1/' wgcf-profile.conf && \
     sed -i 's/DNS = 1.1.1.1/DNS = 208.67.222.222,8.8.8.8,1.1.1.1/' wgcf-profile.conf
 fi
+
+netfilter-persistent save || apt-get install iptables-persistent
 
 cp wgcf-profile.conf /etc/wireguard/wgcf.conf && \
 wg-quick up wgcf
