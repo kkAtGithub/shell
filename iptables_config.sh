@@ -20,7 +20,7 @@ iptables -A INPUT -p icmp -j ACCEPT
 ip6tables -A INPUT -p icmpv6 -j ACCEPT
 
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
 while getopts ":t:u:i:" optname
 do
