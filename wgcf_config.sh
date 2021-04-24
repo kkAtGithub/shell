@@ -8,7 +8,7 @@ apt update
 apt install net-tools iproute2 openresolv dnsutils -y
 apt install wireguard-tools --no-install-recommends
 
-apt install wireguard-dkms -y
+apt install wireguard-dkms wireguard-tools linux-headers-$(uname -r) -y
 modprobe wireguard
 lsmod | grep wireguard
 
