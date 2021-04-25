@@ -2,8 +2,8 @@
 
 cd /root/shell
 
-curl -o frpc_update.sh https://raw.githubusercontent.com/kkAtGithub/shell/main/frpc_update.sh && \
-chmod 700 frpc_update.sh
+curl -o frp_update.sh https://raw.githubusercontent.com/kkAtGithub/shell/main/frp_update.sh && \
+chmod 700 frp_update.sh
 curl -o docker_setup.sh https://raw.githubusercontent.com/kkAtGithub/shell/main/docker_setup.sh && \
 chmod 700 docker_setup.sh
 curl -o fail2ban_setup.sh https://raw.githubusercontent.com/kkAtGithub/shell/main/fail2ban_setup.sh && \
