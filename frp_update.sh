@@ -22,7 +22,7 @@ else
     cd frp_*
 
     $SUDO cp -f "frpc" "${PREFIX}/bin/"
-#    $SUDO cp -f "frps" "${PREFIX}/bin/"
+    $SUDO cp -f "frps" "${PREFIX}/bin/"
 
     CUR_VER=$(${PREFIX}/bin/frpc -v)
     echo "Update FRP Complete (${VER} -> ${CUR_VER})!"
@@ -33,3 +33,4 @@ popd >/dev/null
 rm -rf "${TMP_DIR}"
 
 systemctl restart frpc
+systemctl restart frps
