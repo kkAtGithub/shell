@@ -5,7 +5,7 @@ MODE=$1
 echo "deb http://deb.debian.org/debian $(lsb_release -sc)-backports main" | tee /etc/apt/sources.list.d/backports.list
 apt update
 
-apt install net-tools iproute2 openresolv resolvconf dnsutils -y
+apt install net-tools iproute2 openresolv dnsutils -y
 
 apt install wireguard-dkms wireguard-tools linux-headers-$(uname -r) -y
 modprobe wireguard
