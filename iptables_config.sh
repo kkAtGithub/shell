@@ -75,7 +75,7 @@ ip6tables -P INPUT DROP
 iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
 
-netfilter-persistent save || apt-get install iptables-persistent
+netfilter-persistent save || apt-get install iptables-persistent -y
 
 iptables -L
 ip6tables -L
