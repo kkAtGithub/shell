@@ -40,3 +40,4 @@ echo "docker-compose -f /root/docker/docker-compose.yml up --remove-orphans -d" 
 echo "exit 0" >> docker-autostart.sh
 chmod 700 docker-autostart.sh
 
+exit 0
