@@ -55,3 +55,5 @@ wg-quick down wgcf
 systemctl start wg-quick@wgcf && \
 systemctl enable wg-quick@wgcf && \
 systemctl restart wg-quick@wgcf
+
+exit 0
