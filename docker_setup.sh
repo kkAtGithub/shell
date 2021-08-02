@@ -2,27 +2,37 @@
 
 # apt-get remove docker docker-engine docker.io containerd runc 
 
-apt-get update && \
+apt update && \
+apt install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release -y && \
 
-apt-get install \
-        apt-transport-https \
-        ca-certificates \
-        curl \
-        gnupg \
-        lsb-release -y && \
+ID=$(echo $(lsb_release -is) | awk '{print tolower($0)}')
+MACHINE=$(uname -m)
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+if [[ $MACHINE =~ "x86_64" ]]; then
+    ARCH="amd64"
+    curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose
+if
+
+if [[ $MACHINE =~ "aarch64" ]]; then
+    ARCH="arm64"
+    apt update
+    apt install -y python3-pip libffi-dev
+    pip3 install docker-compose
+if
+curl -fsSL https://download.docker.com/linux/$ID/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
 
 echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/$ID \
+    $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
 
-apt-get update && \
-
-apt-get install docker-ce docker-ce-cli containerd.io -y && \
-
-curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
-chmod +x /usr/local/bin/docker-compose
+apt update && \
+apt install docker-ce docker-ce-cli containerd.io -y && \
 
 mkdir /root/docker
 cd /root/docker
