@@ -33,7 +33,9 @@ echo \
 apt update && \
 apt install docker-ce docker-ce-cli containerd.io -y && \
 
-mkdir /root/docker
+if [ ! -d "/root/docker" ]; then
+  mkdir /root/docker
+fi
 cd /root/docker
 echo "#!/bin/sh -e" > docker-autostart.sh
 echo "docker-compose -f /root/docker/docker-compose.yml up --remove-orphans -d" >> docker-autostart.sh
