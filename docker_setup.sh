@@ -12,13 +12,11 @@ apt install \
 
 ID=$(echo $(lsb_release -is) | awk '{print tolower($0)}')
 MACHINE=$(uname -m)
-
 if [[ $MACHINE =~ "x86_64" ]]; then
     ARCH="amd64"
     curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose
 fi
-
 if [[ $MACHINE =~ "aarch64" ]]; then
     ARCH="arm64"
     apt update
