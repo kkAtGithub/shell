@@ -9,6 +9,7 @@ if [ $# -eq 0 ]; then
     exit 0
 fi
 
+systemctl stop fail2ban
 
 iptables -L
 ip6tables -L
@@ -82,5 +83,7 @@ netfilter-persistent save || apt-get install iptables-persistent -y
 
 iptables -L
 ip6tables -L
+
+systemctl start fail2ban
 
 exit 0
