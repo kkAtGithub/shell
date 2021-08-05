@@ -16,6 +16,12 @@ ip6tables -L
 iptables -F
 ip6tables -F
 
+iptables -P INPUT DROP
+ip6tables -P INPUT DROP
+
+iptables -P FORWARD DROP
+ip6tables -P FORWARD DROP
+
 iptables -A INPUT -p icmp -j ACCEPT
 ip6tables -A INPUT -p icmpv6 -j ACCEPT
 
@@ -68,9 +74,6 @@ do
     esac
     # echo "option index is $OPTIND"
 done
-
-iptables -P INPUT DROP
-ip6tables -P INPUT DROP
 
 iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
