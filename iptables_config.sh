@@ -30,7 +30,10 @@ ip6tables -A INPUT -p icmpv6 -j ACCEPT
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
-while getopts ":t:u:i:" optname
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+ip6tables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+while getopts ":t:u:i:d:" optname
 do
     case "$optname" in
       "t")
@@ -62,8 +65,7 @@ do
         done
         ;;
       "d")
-        iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-        ip6tables -A INPUT -p tcp --dport 22 -j ACCEPT
+        echo "Adding default rules."
         iptables -A INPUT -p tcp --dport 80 -j ACCEPT
         ip6tables -A INPUT -p tcp --dport 80 -j ACCEPT
         iptables -A INPUT -p tcp --dport 443 -j ACCEPT
