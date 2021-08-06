@@ -70,6 +70,7 @@ do
         ip6tables -A INPUT -p tcp --dport 443 -j ACCEPT
         iptables -A INPUT -s localhost -j ACCEPT
         iptables -A INPUT -s 172.18.0.0/24 -j ACCEPT
+        ;;
       ":")
         echo "No argument value for option $OPTARG"
         exit 0
