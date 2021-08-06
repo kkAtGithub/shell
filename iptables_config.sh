@@ -6,6 +6,7 @@ if [ $# -eq 0 ]; then
     echo -e "\t\t\t-t tcp"
     echo -e "\t\t\t-u udp"
     echo -e "\t\t\t-i ip"
+    echo -e "\t\t\t-d default"
     exit 0
 fi
 
@@ -60,6 +61,15 @@ do
             fi
         done
         ;;
+      "d")
+        iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+        ip6tables -A INPUT -p tcp --dport 22 -j ACCEPT
+        iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+        ip6tables -A INPUT -p tcp --dport 80 -j ACCEPT
+        iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+        ip6tables -A INPUT -p tcp --dport 443 -j ACCEPT
+        iptables -A INPUT -s localhost -j ACCEPT
+        iptables -A INPUT -s 172.18.0.0/24 -j ACCEPT
       ":")
         echo "No argument value for option $OPTARG"
         exit 0
