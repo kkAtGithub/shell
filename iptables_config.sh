@@ -33,7 +33,7 @@ ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 ip6tables -A INPUT -p tcp --dport 22 -j ACCEPT
 
-while getopts ":t:u:i:d:" optname
+while getopts ":t:u:i:d" optname
 do
     case "$optname" in
       "t")
