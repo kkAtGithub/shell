@@ -33,7 +33,7 @@ ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 ip6tables -A INPUT -p tcp --dport 22 -j ACCEPT
 
-while getopts ":t:u:i:d" optname
+while getopts ":t:u:i:d:c:w:l" optname
 do
     case "$optname" in
       "t")
@@ -66,12 +66,23 @@ do
         ;;
       "d")
         echo "Adding default rules."
+        iptables -A INPUT -s localhost -j ACCEPT
+        ;;
+      "c")
+        echo "Adding container rules."
+        iptables -A INPUT -s 172.18.0.0/24 -j ACCEPT
+        ;;
+      "w")
+        echo "Adding web rules."
         iptables -A INPUT -p tcp --dport 80 -j ACCEPT
         ip6tables -A INPUT -p tcp --dport 80 -j ACCEPT
         iptables -A INPUT -p tcp --dport 443 -j ACCEPT
         ip6tables -A INPUT -p tcp --dport 443 -j ACCEPT
-        iptables -A INPUT -s localhost -j ACCEPT
-        iptables -A INPUT -s 172.18.0.0/24 -j ACCEPT
+        ;;
+      "l")
+        echo "Adding lan rules."
+        iptables -A INPUT -p tcp --dport 16999 -j ACCEPT
+        ip6tables -A INPUT -p tcp --dport 16999 -j ACCEPT
         iptables -A INPUT -s 192.168.99.0/24 -j ACCEPT
         ;;
       ":")
