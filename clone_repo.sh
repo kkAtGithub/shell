@@ -2,6 +2,10 @@
 
 cd /root/shell
 
+curl -o backup.sh https://raw.githubusercontent.com/kkAtGithub/shell/main/backup.sh && \
+chmod 700 backup.sh
+curl -o restore.sh https://raw.githubusercontent.com/kkAtGithub/shell/main/restore.sh && \
+chmod 700 restore.sh
 curl -o frp_update.sh https://raw.githubusercontent.com/kkAtGithub/shell/main/frp_update.sh && \
 chmod 700 frp_update.sh
 curl -o docker_setup.sh https://raw.githubusercontent.com/kkAtGithub/shell/main/docker_setup.sh && \
