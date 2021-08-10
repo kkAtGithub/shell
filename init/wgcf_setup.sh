@@ -2,19 +2,16 @@
 
 MODE=$1
 
-echo "deb http://deb.debian.org/debian $(lsb_release -sc)-backports main" | tee /etc/apt/sources.list.d/backports.list
-apt update
-
-apt install net-tools iproute2 openresolv dnsutils -y
-
-apt install wireguard-dkms wireguard-tools linux-headers-$(uname -r) -y
-modprobe wireguard
+apt update && \
+apt install net-tools iproute2 openresolv dnsutils -y && \
+apt install wireguard-tools -y && \
+modprobe wireguard && \
 lsmod | grep wireguard
 
-apt update
+apt update && \
 apt install curl lsb-release -y
 
-mkdir /root/wgcf
+mkdir /root/wgcf && \
 cd /root/wgcf
 
 curl -fsSL git.io/wgcf.sh | bash
@@ -40,7 +37,8 @@ fi
 netfilter-persistent save || apt-get install iptables-persistent
 
 cp wgcf-profile.conf /etc/wireguard/wgcf.conf && \
-wg-quick up wgcf
+systemctl enable wg-quick@wgcf && \
+systemctl start wg-quick@wgcf 
 
 if [ "$MODE" == "--ipv4" ];then
     curl -4 ip.p3terx.com
@@ -49,11 +47,5 @@ fi
 if [ "$MODE" == "--ipv6" ];then
     curl -6 ip.p3terx.com
 fi
-
-wg-quick down wgcf
-
-systemctl start wg-quick@wgcf && \
-systemctl enable wg-quick@wgcf && \
-systemctl restart wg-quick@wgcf
 
 exit 0
