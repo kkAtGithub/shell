@@ -28,9 +28,9 @@ if [ "$MODE" == "-4" ];then
     sed -i 's/engage.cloudflareclient.com/[2606:4700:d0::a29f:c001]/' wgcf-profile.conf && \
     sed -i 's/DNS = 1.1.1.1/DNS = 2620:119:35::35,2001:4860:4860::8888,2606:4700:4700::1111/' wgcf-profile.conf
     
-    /bin/cp -rf wgcf-profile.conf /etc/wireguard/wgcf.conf && \
-    systemctl enable wg-quick@wgcf && \
-    systemctl start wg-quick@wgcf
+    /bin/cp -rf wgcf-profile.conf /etc/wireguard/wgcfv4.conf && \
+    systemctl enable wg-quick@wgcfv4 && \
+    systemctl start wg-quick@wgcfv4
     
     curl -4 ip.p3terx.com
 fi
@@ -42,9 +42,9 @@ if [ "$MODE" == "-6" ];then
     sed -i 's/engage.cloudflareclient.com/162.159.192.1/' wgcf-profile.conf && \
     sed -i 's/DNS = 1.1.1.1/DNS = 208.67.222.222,8.8.8.8,1.1.1.1/' wgcf-profile.conf
     
-    /bin/cp -rf wgcf-profile.conf /etc/wireguard/wgcf.conf && \
-    systemctl enable wg-quick@wgcf && \
-    systemctl start wg-quick@wgcf
+    /bin/cp -rf wgcf-profile.conf /etc/wireguard/wgcfv6.conf && \
+    systemctl enable wg-quick@wgcfv6 && \
+    systemctl start wg-quick@wgcfv6
     
     curl -6 ip.p3terx.com
 fi
