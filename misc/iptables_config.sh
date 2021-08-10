@@ -80,7 +80,7 @@ do
         ;;
       "-d")
         echo "Adding DEFAULT rules."
-        iptables -A INPUT -s 127.0.0.0/8 -d 127.0.0.0/8 -j ACCEPT
+        
         shift
         ;;
       "-c")
@@ -122,6 +122,8 @@ do
     esac
     # echo "option index is $OPTIND"
 done
+
+iptables -A INPUT -s 127.0.0.0/8 -d 127.0.0.0/8 -j ACCEPT
 
 iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
