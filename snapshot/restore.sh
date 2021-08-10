@@ -3,7 +3,7 @@
 chmod 700 /root/shell/clone_repo.sh && \
 /root/shell/clone_repo.sh && \
 /root/shell/init/fail2ban_setup.sh && \
-/root/shell/misc/iptables_config.sh -cd
+/root/shell/misc/iptables_config.sh -c
 
 apt update && \
 apt install net-tools wireguard-tools &&\
