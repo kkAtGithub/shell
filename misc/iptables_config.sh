@@ -78,11 +78,11 @@ do
         done
         shift 2
         ;;
-      "-d")
-        echo "Adding DEFAULT rules."
+#       "-d")
+#         echo "Adding DEFAULT rules."
         
-        shift
-        ;;
+#         shift
+#         ;;
       "-c")
         echo "Adding CONTAINER rules."
         iptables -A INPUT -s 172.18.0.0/24 -j ACCEPT
