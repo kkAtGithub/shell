@@ -10,6 +10,14 @@ if [ $# -eq 0 ]; then
     exit 0
 fi
 
+ARGS=`getopt -o wlcdi:t:u: -n "$0" -- "$@"`
+if [ $? != 0 ]; then
+    echo "Terminating..."
+    exit 1
+fi
+
+eval set -- "${ARGS}"
+
 systemctl stop fail2ban
 
 iptables -L
@@ -33,27 +41,29 @@ ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 ip6tables -A INPUT -p tcp --dport 22 -j ACCEPT
 
-while getopts ":t:u:i:d:c:w:l" optname
+while true
 do
-    case "$optname" in
-      "t")
-        array=(${OPTARG//,/ })
+    case "$1" in
+      "-t")
+        array=(${2//,/ })
         for port in ${array[@]}
         do 
             iptables -A INPUT -p tcp --dport $port -j ACCEPT
             ip6tables -A INPUT -p tcp --dport $port -j ACCEPT
         done
+        shift 2
         ;;
-      "u")
-        array=(${OPTARG//,/ })
+      "-u")
+        array=(${2//,/ })
         for port in ${array[@]}
         do 
             iptables -A INPUT -p udp --dport $port -j ACCEPT
             ip6tables -A INPUT -p udp --dport $port -j ACCEPT
         done
+        shift 2
         ;;
-      "i")
-        array=(${OPTARG//,/ })
+      "-i")
+        array=(${2//,/ })
         for ip in ${array[@]}
         do 
             if [[ $ip =~ ":" ]]
@@ -63,35 +73,44 @@ do
                 iptables -A INPUT -s $ip -j ACCEPT
             fi
         done
+        shift 2
         ;;
-      "d")
-        echo "Adding default rules."
-        iptables -A INPUT -s localhost -j ACCEPT
+      "-d")
+        echo "Adding DEFAULT rules."
+        iptables -A INPUT -s 127.0.0.0/8 -d 127.0.0.0/8 -j ACCEPT
+        shift
         ;;
-      "c")
-        echo "Adding container rules."
+      "-c")
+        echo "Adding CONTAINER rules."
         iptables -A INPUT -s 172.18.0.0/24 -j ACCEPT
+        shift
         ;;
-      "w")
-        echo "Adding web rules."
+      "-w")
+        echo "Adding WEB rules."
         iptables -A INPUT -p tcp --dport 80 -j ACCEPT
         ip6tables -A INPUT -p tcp --dport 80 -j ACCEPT
         iptables -A INPUT -p tcp --dport 443 -j ACCEPT
         ip6tables -A INPUT -p tcp --dport 443 -j ACCEPT
+        shift
         ;;
-      "l")
-        echo "Adding lan rules."
+      "-l")
+        echo "Adding LAN rules."
         iptables -A INPUT -p tcp --dport 16999 -j ACCEPT
         ip6tables -A INPUT -p tcp --dport 16999 -j ACCEPT
         iptables -A INPUT -s 192.168.99.0/24 -j ACCEPT
+        shift
         ;;
-      ":")
-        echo "No argument value for option $OPTARG"
-        exit 0
-        ;;
-      "?")
-        echo "Unknown option $OPTARG"
-        exit 0
+      # ":")
+      #   echo "No argument value for option $OPTARG"
+      #   exit 0
+      #   ;;
+      # "?")
+      #   echo "Unknown option $OPTARG"
+      #   exit 0
+      #   ;;
+      --)
+        shift
+        break
         ;;
       *)
         echo "Unknown error while processing options"
