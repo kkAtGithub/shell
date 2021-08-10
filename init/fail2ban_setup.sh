@@ -1,12 +1,10 @@
 #!/bin/bash
 
-apt install fail2ban -y
+apt install fail2ban inetutils-syslogd -y
 
-curl -o /etc/fail2ban/jail.local https://raw.githubusercontent.com/kkAtGithub/shell/main/jail.local
+/bin/cp -rf /etc/fail2ban/jail.local /root/shell/misc/jail.local
 
 systemctl enable fail2ban && \
 systemctl restart fail2ban
-
-tail -f /var/log/fail2ban.log
 
 exit 0
