@@ -98,8 +98,8 @@ do
         ;;
       "-l")
         echo "Adding LAN rules."
-        iptables -A INPUT -p tcp --dport 16999 -j ACCEPT
-        ip6tables -A INPUT -p tcp --dport 16999 -j ACCEPT
+        iptables -A INPUT -p udp --dport 16999 -j ACCEPT
+        ip6tables -A INPUT -p udp --dport 16999 -j ACCEPT
         iptables -A INPUT -s 192.168.99.0/24 -j ACCEPT
         shift
         ;;
