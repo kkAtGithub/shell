@@ -6,6 +6,9 @@ if [ $# -eq 0 ]; then
     echo -e "\t\t\t-t tcp"
     echo -e "\t\t\t-u udp"
     echo -e "\t\t\t-i ip"
+    echo -e "\t\t\t-w web"
+    echo -e "\t\t\t-l lan"
+    echo -e "\t\t\t-c container"
     echo -e "\t\t\t-d default"
     exit 0
 fi
