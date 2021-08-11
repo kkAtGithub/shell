@@ -10,18 +10,24 @@ if [ -d "/root/backup/wireguard" ]; then
     apt install net-tools wireguard-tools &&\
     /bin/cp -rf /root/backup/service/wg-quick@.service /lib/systemd/system/wg-quick@.service && \
     /bin/cp -rf /root/backup/wireguard /etc/wireguard && \
-    systemctl enable wg-quick@wg99 && \
-    systemctl start wg-quick@wg99
+    systemctl daemon-reload
+    
+    if [ -f "/etc/wireguard/wg99.conf" ]; then
+        systemctl enable wg-quick@wg99 && \
+        systemctl start wg-quick@wg99
+    fi
 fi
 
 /bin/cp -rf /root/backup/conf/hosts /etc/hosts
 /bin/cp -rf /root/backup/conf/sshd_config /etc/ssh/sshd_config
 
-/root/shell/init/docker_setup.sh && \
-/bin/cp -rf /root/backup/service/docker.service /lib/systemd/system/docker.service && \
-systemctl daemon-reload docker.service && \
-systemctl restart docker.service && \
-/root/docker/docker-autostart.sh
+if [ -f "/root/backup/service/docker.service" ]; then
+    /root/shell/init/docker_setup.sh && \
+    /bin/cp -rf /root/backup/service/docker.service /lib/systemd/system/docker.service && \
+    systemctl daemon-reload && \
+    systemctl restart docker.service && \
+    /root/docker/docker-autostart.sh
+fi
 
 { crontab -l -u root; echo "@reboot /root/docker/docker-autostart.sh > /dev/null 2>&1"; } | crontab -u root -
 { crontab -l -u root; echo "0 3 * * * docker system prune --force > /dev/null 2>&1"; } | crontab -u root -
