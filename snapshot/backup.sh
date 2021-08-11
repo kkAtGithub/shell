@@ -11,7 +11,10 @@ if [ -d "/etc/wireguard" ]; then
     /bin/cp -rf /lib/systemd/system/wg-quick@.service /root/backup/service/wg-quick@.service
 fi
 
-/bin/cp -rf /lib/systemd/system/docker.service /root/backup/service/docker.service
+if [ -d "/etc/docker" ]; then
+    /bin/cp -rf /lib/systemd/system/docker.service /root/backup/service/docker.service
+fi
+
 /bin/cp -rf /etc/hosts /root/backup/conf/hosts
 /bin/cp -rf /etc/ssh/sshd_config /root/backup/conf/sshd_config
 
