@@ -16,6 +16,5 @@ if [ -d "/etc/docker" ]; then
 fi
 
 /bin/cp -rf /etc/hosts /root/backup/conf/hosts
-/bin/cp -rf /etc/ssh/sshd_config /root/backup/conf/sshd_config
 
 exit 0
