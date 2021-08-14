@@ -19,7 +19,6 @@ if [ -d "/root/backup/wireguard" ]; then
 fi
 
 /bin/cp -rf /root/backup/conf/hosts /etc/hosts
-/bin/cp -rf /root/backup/conf/sshd_config /etc/ssh/sshd_config
 
 if [ -f "/root/backup/service/docker.service" ]; then
     /root/shell/init/docker_setup.sh && \
