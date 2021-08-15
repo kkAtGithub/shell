@@ -21,7 +21,7 @@ fi
 /bin/cp -rf /root/backup/conf/hosts /etc/hosts
 
 if [ -f "/root/backup/service/docker.service" ]; then
-    /root/shell/init/docker_setup.sh
+    /root/shell/init/docker_setup.sh && \
     /bin/cp -rf /root/backup/service/docker.service /lib/systemd/system/docker.service && \
     systemctl daemon-reload && \
     systemctl restart docker.service && \
