@@ -41,3 +41,6 @@ apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }') -y && \
 apt-get autoremove -y
 
 /root/shell/snapshot/restore.sh
+apt-get autoremove -y
+
+exit 0
