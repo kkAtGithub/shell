@@ -25,7 +25,12 @@ done
 
 rm /etc/apt/sources.list.d/*
 
-sed -i 's/buster/bullseye/g' /etc/apt/sources.list
+sed -i '/buster/d'/etc/apt/sources.list && \
+sed -i '/bullseye/d'/etc/apt/sources.list && \
+echo "deb http://deb.debian.org/debian bullseye main contrib non-free" >> /etc/apt/sources.list && \
+echo "deb http://deb.debian.org/debian bullseye-updates main contrib non-free" >> /etc/apt/sources.list && \
+echo "deb http://security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
+echo "deb http://ftp.debian.org/debian bullseye-backports main contrib non-free" >> /etc/apt/sources.list
 
 apt-get update && \
 apt-get autoremove -y && \
