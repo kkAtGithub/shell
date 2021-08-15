@@ -28,6 +28,8 @@ if [ -f "/root/backup/service/docker.service" ]; then
     /root/docker/docker-autostart.sh
 fi
 
+apt-get autoremove -y
+
 { crontab -l -u root; echo "@reboot /root/docker/docker-autostart.sh > /dev/null 2>&1"; } | crontab -u root -
 { crontab -l -u root; echo "0 3 * * * docker system prune --force > /dev/null 2>&1"; } | crontab -u root -
 { crontab -l -u root; echo "0 4 * * * /root/docker/docker-autostart.sh > /dev/null 2>&1"; } | crontab -u root -
