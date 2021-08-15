@@ -25,8 +25,8 @@ done
 
 rm /etc/apt/sources.list.d/*
 
-sed -i '/buster/d'/etc/apt/sources.list && \
-sed -i '/bullseye/d'/etc/apt/sources.list && \
+sed -i '/buster/d' /etc/apt/sources.list && \
+sed -i '/bullseye/d' /etc/apt/sources.list && \
 echo "deb http://deb.debian.org/debian bullseye main contrib non-free" >> /etc/apt/sources.list && \
 echo "deb http://deb.debian.org/debian bullseye-updates main contrib non-free" >> /etc/apt/sources.list && \
 echo "deb http://security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
