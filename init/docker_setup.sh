@@ -2,6 +2,14 @@
 
 # apt-get remove docker docker-engine docker.io containerd runc 
 
+apt-get purge -y docker-engine docker docker.io docker-ce && \
+apt-get autoremove -y --purge docker-engine docker docker.io docker-ce 
+
+rm -rf /var/lib/docker /etc/docker
+rm /etc/apparmor.d/docker
+groupdel docker
+rm -rf /var/run/docker.sock
+
 apt-get update && \
 apt-get install \
     apt-transport-https \
