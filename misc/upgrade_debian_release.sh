@@ -38,6 +38,6 @@ apt-get autoremove -y && \
 apt-get full-upgrade -y
 
 apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }') -y && \
-apt-get autoremove
+apt-get autoremove -y
 
 /root/shell/snapshot/restore.sh
