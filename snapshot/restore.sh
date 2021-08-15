@@ -6,8 +6,8 @@ chmod 700 /root/shell/clone_repo.sh && \
 /root/shell/misc/iptables_config.sh -c
 
 if [ -d "/root/backup/wireguard" ]; then
-    apt update && \
-    apt install net-tools wireguard-tools &&\
+    apt-get update && \
+    apt-get install net-tools wireguard-tools -y &&\
     /bin/cp -rf /root/backup/service/wg-quick@.service /lib/systemd/system/wg-quick@.service && \
     /bin/cp -rf /root/backup/wireguard /etc/wireguard && \
     systemctl daemon-reload
