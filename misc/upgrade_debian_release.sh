@@ -1,7 +1,7 @@
 #!/bin/bash
 
-old_release="buster"
-new_release="bullseye"
+old_release=buster
+new_release=bullseye
 
 
 apt-get update && \
