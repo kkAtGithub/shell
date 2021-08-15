@@ -33,6 +33,6 @@ sed -i 's/$old_release/$new_release/g' /etc/apt/sources.list
 
 apt-get update && \
 apt-get autoremove -y && \
-apt full-upgrade -y
+apt-get full-upgrade -y
 
 apt purge $(dpkg -l | awk '/^rc/ { print $2 }')
