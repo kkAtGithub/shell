@@ -2,14 +2,14 @@
 
 MODE=$1
 
-apt update && \
-apt install net-tools iproute2 openresolv dnsutils -y && \
-apt install wireguard-tools -y && \
+apt-get update && \
+apt-get install net-tools iproute2 openresolv dnsutils -y && \
+apt-get install wireguard-tools -y && \
 modprobe wireguard && \
 lsmod | grep wireguard
 
-apt update && \
-apt install curl lsb-release -y
+apt-get update && \
+apt-get install curl lsb-release -y
 
 rm -rf /root/wgcf
 mkdir /root/wgcf && \
