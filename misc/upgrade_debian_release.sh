@@ -1,5 +1,7 @@
 #!/bin/bash
 
+/root/shell/snapshot/backup.sh
+
 apt-get update && \
 apt-get full-upgrade -y && \
 apt-get install apt-forktracer -y && \
@@ -37,3 +39,5 @@ apt-get full-upgrade -y
 
 apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }') -y && \
 apt-get autoremove
+
+/root/shell/snapshot/restore.sh
