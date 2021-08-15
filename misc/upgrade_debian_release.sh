@@ -1,9 +1,5 @@
 #!/bin/bash
 
-old_release=buster
-new_release=bullseye
-
-
 apt-get update && \
 apt-get full-upgrade -y && \
 apt-get install apt-forktracer -y && \
@@ -29,7 +25,7 @@ done
 
 rm /etc/apt/sources.list.d/*
 
-sed -i 's/$old_release/$new_release/g' /etc/apt/sources.list
+sed -i 's/buster/bullseye/g' /etc/apt/sources.list
 
 apt-get update && \
 apt-get autoremove -y && \
