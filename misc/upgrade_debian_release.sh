@@ -35,4 +35,5 @@ apt-get update && \
 apt-get autoremove -y && \
 apt-get full-upgrade -y
 
-apt purge $(dpkg -l | awk '/^rc/ { print $2 }')
+apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }') -y && \
+apt-get autoremove
