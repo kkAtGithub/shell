@@ -85,7 +85,7 @@ do
 #         ;;
       "-c")
         echo "Adding CONTAINER rules."
-        iptables -A INPUT -s 172.18.0.0/24 -j ACCEPT
+        iptables -A INPUT -s 172.16.0.0/12 -j ACCEPT
         shift
         ;;
       "-w")
