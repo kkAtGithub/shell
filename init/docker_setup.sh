@@ -39,7 +39,7 @@ echo \
 
 (apt-get update && \
 apt-get install docker-ce docker-ce-cli containerd.io -y) || \
-apt-get install docker-ce-cli containerd.io -y && \
+apt-get install docker-ce docker-ce-cli containerd.io -y
 apt-get install docker-ce -y
 
 if [ ! -d "/root/docker" ]; then
