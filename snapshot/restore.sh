@@ -24,7 +24,7 @@ if [ -f "/root/backup/service/docker.service" ]; then
     IP_WG99=$(ifconfig wg99|grep inet|awk '{print $2}'|tr -d "addr:")
     EXEC_START=$(cat /lib/systemd/system/docker.service | grep "ExecStart")
     /root/shell/init/docker_setup.sh
-    if [[ $EXEC_START =~ $IP_WG99 ]]; then
+    if [[ ! $EXEC_START =~ $IP_WG99 ]]; then
         sed -i "s#$EXEC_START#$EXEC_START -H tcp://$IP_WG99:2375#g" /lib/systemd/system/docker.service
     fi
     systemctl daemon-reload && \
