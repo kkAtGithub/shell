@@ -21,8 +21,10 @@ fi
 /bin/cp -rf /root/backup/conf/hosts /etc/hosts
 
 if [ -f "/root/backup/service/docker.service" ]; then
+    IP_WG99=$(ifconfig wg99|grep inet|awk '{print $2}'|tr -d "addr:")
+    EXEC_START=$(cat /lib/systemd/system/docker.service | grep "ExecStart")
     /root/shell/init/docker_setup.sh && \
-    /bin/cp -rf /root/backup/service/docker.service /lib/systemd/system/docker.service && \
+    sed -i "s#$EXEC_START#$EXEC_START -H tcp://$IP_WG99:2375" /lib/systemd/system/docker.service && \
     systemctl daemon-reload && \
     systemctl restart docker.service && \
     /root/docker/docker-autostart.sh
