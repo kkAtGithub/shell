@@ -12,9 +12,6 @@ if [ -d "/etc/wireguard" ]; then
 fi
 
 if [ -d "/etc/docker" ]; then
-    IP_WG99=$(ifconfig wg99|grep inet|awk '{print $2}'|tr -d "addr:")
-    EXEC_START=$(cat /lib/systemd/system/docker.service | grep "ExecStart")
-    sed -i "s#$EXEC_START#$EXEC_START -H tcp://$IP_WG99:2375#g" /lib/systemd/system/docker.service && \
     /bin/cp -rf /lib/systemd/system/docker.service /root/backup/service/docker.service
 fi
 
