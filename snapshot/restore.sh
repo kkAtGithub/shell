@@ -9,7 +9,7 @@ if [ -d "/root/backup/wireguard" ]; then
     apt-get update && \
     apt-get install net-tools wireguard-tools -y &&\
     /bin/cp -rf /root/backup/service/wg-quick@.service /lib/systemd/system/wg-quick@.service && \
-    /bin/cp -rf /root/backup/wireguard /etc/wireguard && \
+    /bin/cp -rf /root/backup/wireguard /etc/ && \
     systemctl daemon-reload
     
     if [ -f "/etc/wireguard/wg99.conf" ]; then
