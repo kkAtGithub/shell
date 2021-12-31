@@ -5,9 +5,9 @@
 # apt-get purge -y docker-engine docker docker.io docker-ce 
 # apt-get autoremove -y --purge docker-engine docker docker.io docker-ce 
 
-rm -rf /var/lib/docker /etc/docker
-groupdel docker
-rm -rf /var/run/docker.sock
+# rm -rf /var/lib/docker /etc/docker
+# groupdel docker
+# rm -rf /var/run/docker.sock
 
 apt-get update && \
 apt-get install \
