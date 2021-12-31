@@ -7,6 +7,7 @@ if [ ! -d "/root/backup" ]; then
 fi
 
 if [ -d "/etc/wireguard" ]; then
+    rm -rf /root/backup/wireguard
     /bin/cp -rf /etc/wireguard /root/backup/
     /bin/cp -rf /lib/systemd/system/wg-quick@.service /root/backup/service/wg-quick@.service
 fi
