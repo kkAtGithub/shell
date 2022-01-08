@@ -5,6 +5,12 @@ chmod 700 /root/shell/clone_repo.sh && \
 /root/shell/init/fail2ban_setup.sh && \
 /root/shell/misc/iptables_config.sh -c
 
+if [ -d "/root/.adguard" ]; then
+    /root/shell/init/adguard_setup.sh
+    /bin/cp -rf /root/.adguard /opt/AdGuardHome/AdGuardHome.yaml
+    /bin/cp -rf /root/.adguard/nginx /etc/nginx/nginx.conf
+fi
+
 if [ -d "/root/backup/wireguard" ]; then
     apt-get update && \
     apt-get install net-tools wireguard-tools -y &&\
@@ -17,6 +23,7 @@ if [ -d "/root/backup/wireguard" ]; then
         systemctl start wg-quick@wg99
     fi
 fi
+
 if [ -f "/root/backup/conf/hosts" ]; then
     /bin/cp -rf /root/backup/conf/hosts /etc/hosts
 fi
