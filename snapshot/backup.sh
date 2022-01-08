@@ -6,6 +6,11 @@ if [ ! -d "/root/backup" ]; then
     mkdir /root/backup/service
 fi
 
+if [ -d "/root/.adguard" ]; then
+    /bin/cp -rf /opt/AdGuardHome/AdGuardHome.yaml /root/.adguard
+    /bin/cp -rf /etc/nginx/nginx.conf /root/.adguard/nginx
+fi
+
 if [ -d "/etc/wireguard" ]; then
     rm -rf /root/backup/wireguard
     /bin/cp -rf /etc/wireguard /root/backup/
