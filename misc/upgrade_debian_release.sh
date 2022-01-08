@@ -37,6 +37,10 @@ apt-get update && \
 apt-get autoremove -y && \
 apt-get full-upgrade -y
 
+apt-get install linux-image-amd64 -y && \
+apt-get install linux-headers-amd64 -y && \
+update-grub
+
 apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }') -y && \
 apt-get autoremove -y
 
