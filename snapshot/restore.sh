@@ -3,7 +3,7 @@
 chmod 700 /root/shell/clone_repo.sh && \
 /root/shell/clone_repo.sh && \
 /root/shell/init/fail2ban_setup.sh && \
-/root/shell/misc/iptables_config.sh -c
+/root/shell/misc/iptables_config.sh
 
 if [ -d "/root/.adguard" ]; then
     /root/shell/init/adguard_setup.sh
@@ -42,6 +42,7 @@ if [ -f "/root/backup/service/docker.service" ]; then
     { crontab -l -u root; echo "@reboot /root/docker/docker-autostart.sh > /dev/null 2>&1"; } | crontab -u root -
     { crontab -l -u root; echo "0 3 * * * docker system prune --force > /dev/null 2>&1"; } | crontab -u root -
     { crontab -l -u root; echo "0 4 * * * /root/docker/docker-autostart.sh > /dev/null 2>&1"; } | crontab -u root -
+    /root/shell/misc/iptables_config.sh -c
 fi
 
 apt-get autoremove -y
