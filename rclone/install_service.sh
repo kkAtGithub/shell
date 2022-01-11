@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+cd /root/shell/rclone
 
 curl https://rclone.org/install.sh | bash && \
 
@@ -22,7 +22,6 @@ echo "" >> /etc/systemd/system/rclone-mount.service && \
 
 systemctl daemon-reload
 
-cd /root/shell/rclone
 chmod 700 rclone_*.sh
 
 exit 0
