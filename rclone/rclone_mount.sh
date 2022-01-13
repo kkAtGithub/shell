@@ -1,8 +1,6 @@
 #!/bin/bash
 
 
-cd /root/shell/rclone
-
 (source /root/.config/rclone/rclone_mount.env) || exit 1
 
 if [ -z "$1" ]; then
@@ -27,5 +25,6 @@ do
     (runuser -l "$MOUNT_USER" -c "/usr/bin/rclone mount $drive_name:/ $MOUNT_ROOT/$MOUNT_PREFIX$mount_name $OTHER_OPTS --config $CONFIG_FILE --daemon &") || exit 1
 
 done
+
 
 exit 0
