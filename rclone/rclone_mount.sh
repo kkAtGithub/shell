@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-(source /root/.config/rclone/rclone_mount.env) || exit 1
+source /root/.config/rclone/rclone_mount.env
 
 if [ -z "$1" ]; then
     echo "Using default config file for rclone-mount: $CONFIG_FILE"
