@@ -2,7 +2,7 @@
 
 cd /root/shell/rclone
 
-curl https://rclone.org/install.sh | bash && \
+curl https://rclone.org/install.sh | bash
 
 echo "[Unit]" > /etc/systemd/system/rclone-mount.service && \
 echo "Description=Rclone mount" >> /etc/systemd/system/rclone-mount.service && \
