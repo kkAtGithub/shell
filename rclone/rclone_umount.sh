@@ -1,15 +1,7 @@
 #!/bin/bash
 
-cd /root/shell/rclone
 
-source /root/.config/rclone/rclone_mount.env
-
-# if [ -z "$1" ]; then
-#     echo "Using default config file for rclone-mount: $CONFIG_FILE"
-# else
-#     CONFIG_FILE=$1
-#     echo "Using custom config file for rclone-mount: $CONFIG_FILE"
-# fi
+(source /root/.config/rclone/rclone_mount.env) || exit 1
 
 for mount_path in $((find $MOUNT_ROOT -maxdepth 1  | xargs ls -d $MOUNT_ROOT | grep $MOUNT_ROOT/$MOUNT_PREFIX) || exit 1)
 do
