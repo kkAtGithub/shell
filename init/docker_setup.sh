@@ -47,15 +47,15 @@ if [ ! -d "/root/docker" ]; then
 fi
 
 cd /root/docker
-echo "#!/bin/sh -e" > docker-up.sh
-echo "docker-compose -f /root/docker/docker-compose.yml up --remove-orphans -d" >> docker-up.sh
+echo "#!/bin/sh -e" > docker_up.sh
+echo "docker-compose -f /root/docker/docker-compose.yml up --remove-orphans -d" >> docker_up.sh
 echo "exit 0" >> docker-up.sh
-chmod 700 docker-up.sh
+chmod 700 docker_up.sh
 
-echo "#!/bin/sh -e" > docker-down.sh
-echo "docker-compose -f /root/docker/docker-compose.yml down --remove-orphans" >> docker-down.sh
-echo "exit 0" >> docker-down.sh
-chmod 700 docker-down.sh
+echo "#!/bin/sh -e" > docker_down.sh
+echo "docker-compose -f /root/docker/docker-compose.yml down --remove-orphans" >> docker_down.sh
+echo "exit 0" >> docker_down.sh
+chmod 700 docker_down.sh
 
 echo "[Unit]" > /etc/systemd/system/docker-stack.service && \
 echo "Description=Docker stack" >> /etc/systemd/system/docker-stack.service && \
@@ -65,9 +65,9 @@ echo "" >> /etc/systemd/system/docker-stack.service && \
 echo "[Service]" >> /etc/systemd/system/docker-stack.service && \
 echo "Type=oneshot" >> /etc/systemd/system/docker-stack.service && \
 echo "RemainAfterExit=yes" >> /etc/systemd/system/docker-stack.service && \
-echo "ExecStart=/root/docker/docker-up.sh" >> /etc/systemd/system/docker-stack.service && \
-echo "ExecReload=/root/docker/docker-up.sh" >> /etc/systemd/system/docker-stack.service && \
-echo "ExecStop=/root/docker/docker-down.sh" >> /etc/systemd/system/docker-stack.service && \
+echo "ExecStart=/root/docker/docker_up.sh" >> /etc/systemd/system/docker-stack.service && \
+echo "ExecReload=/root/docker/docker_up.sh" >> /etc/systemd/system/docker-stack.service && \
+echo "ExecStop=/root/docker/docker_down.sh" >> /etc/systemd/system/docker-stack.service && \
 echo "" >> /etc/systemd/system/docker-stack.service && \
 echo "[Install]" >> /etc/systemd/system/docker-stack.service && \
 echo "WantedBy=multi-user.target" >> /etc/systemd/system/docker-stack.service && \
