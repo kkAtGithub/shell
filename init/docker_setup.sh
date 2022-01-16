@@ -47,14 +47,14 @@ if [ ! -d "/root/docker" ]; then
 fi
 
 cd /root/docker
-echo "#!/bin/bash" > docker_up.sh
-echo "docker-compose -f /root/docker/docker-compose.yml up --remove-orphans -d" >> docker_up.sh
-echo "exit 0" >> docker_up.sh
+echo "#!/bin/bash" > docker_up.sh && \
+echo "docker-compose -f /root/docker/docker-compose.yml up --remove-orphans -d" >> docker_up.sh && \
+echo "exit 0" >> docker_up.sh && \
 chmod 700 docker_up.sh
 
-echo "#!/bin/bash" > docker_down.sh
-echo "docker-compose -f /root/docker/docker-compose.yml down --remove-orphans" >> docker_down.sh
-echo "exit 0" >> docker_down.sh
+echo "#!/bin/bash" > docker_down.sh && \
+echo "docker-compose -f /root/docker/docker-compose.yml down --remove-orphans" >> docker_down.sh && \
+echo "exit 0" >> docker_down.sh && \
 chmod 700 docker_down.sh
 
 echo "[Unit]" > /etc/systemd/system/docker-stack.service && \
