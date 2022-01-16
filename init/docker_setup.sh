@@ -49,7 +49,7 @@ fi
 cd /root/docker
 echo "#!/bin/sh -e" > docker_up.sh
 echo "docker-compose -f /root/docker/docker-compose.yml up --remove-orphans -d" >> docker_up.sh
-echo "exit 0" >> docker-up.sh
+echo "exit 0" >> docker_up.sh
 chmod 700 docker_up.sh
 
 echo "#!/bin/sh -e" > docker_down.sh
