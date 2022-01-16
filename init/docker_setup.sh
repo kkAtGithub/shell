@@ -66,7 +66,7 @@ echo "[Service]" >> /etc/systemd/system/docker-stack.service && \
 echo "Type=oneshot" >> /etc/systemd/system/docker-stack.service && \
 echo "RemainAfterExit=yes" >> /etc/systemd/system/docker-stack.service && \
 echo "ExecStart=/root/docker/docker-up.sh" >> /etc/systemd/system/docker-stack.service && \
-echo "ExecReload=/root/docker/docker-up.sh" >> /etc/systemd/system/docker-stack.service && \
+echo "ExecReload=/root/docker/docker-down.sh && /root/docker/docker-up.sh" >> /etc/systemd/system/docker-stack.service && \
 echo "ExecStop=/root/docker/docker-down.sh" >> /etc/systemd/system/docker-stack.service && \
 echo "" >> /etc/systemd/system/docker-stack.service && \
 echo "[Install]" >> /etc/systemd/system/docker-stack.service && \
