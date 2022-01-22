@@ -57,6 +57,11 @@ echo "docker-compose -f /root/docker/docker-compose.yml down --remove-orphans" >
 echo "exit 0" >> docker_down.sh && \
 chmod 700 docker_down.sh
 
+if [ -f "/root/docker/docker-autostart.sh" ]; then
+    rm /root/docker/docker-autostart.sh
+    crontab -l -u root | sed '/docker/d' | crontab -u root -
+fi
+
 echo "[Unit]" > /etc/systemd/system/docker-stack.service && \
 echo "Description=Docker stack" >> /etc/systemd/system/docker-stack.service && \
 echo "Wants=network-online.target" >> /etc/systemd/system/docker-stack.service && \
