@@ -38,10 +38,7 @@ if [ -f "/root/backup/service/docker.service" ]; then
 #     fi
     systemctl daemon-reload && \
     systemctl restart docker.service && \
-    /root/docker/docker-autostart.sh
-    { crontab -l -u root; echo "@reboot /root/docker/docker-autostart.sh > /dev/null 2>&1"; } | crontab -u root -
-    { crontab -l -u root; echo "0 3 * * * docker system prune --force > /dev/null 2>&1"; } | crontab -u root -
-    { crontab -l -u root; echo "0 4 * * * /root/docker/docker-autostart.sh > /dev/null 2>&1"; } | crontab -u root -
+    systemctl restart docker-stack.service
     /root/shell/misc/iptables_config.sh -c
 fi
 
