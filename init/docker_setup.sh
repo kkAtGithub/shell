@@ -44,6 +44,9 @@ apt-get install docker-ce -y
 
 if [ ! -d "/root/docker" ]; then
   mkdir /root/docker
+else
+  rm -r /root/docker/docker-*.sh
+  crontab -l -u root | sed '/docker/d' | crontab -u root -
 fi
 
 cd /root/docker
