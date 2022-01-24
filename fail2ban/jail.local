@@ -10,9 +10,9 @@
 enabled = true
 action = iptables-allports
 
-[frps-kk]
+[fail2ban-kk]
 enabled = true
-filter = frps-kk
+filter = fail2ban--kk
 logpath = /root/docker/fail2ban-kk/log/fail2ban-kk.log
 action = iptables-allports
 
