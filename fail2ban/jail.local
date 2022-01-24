@@ -11,10 +11,10 @@
 enabled = true
 action = iptables-allports
 
-[fail2ban-kk]
+[frps-kk]
 enabled = true
-filter = fail2ban--kk
-logpath = /root/docker/fail2ban-kk/log/fail2ban-kk.log
+filter = frps-kk
+logpath = /root/docker/fail2ban-kk/log/frps.log
 action = iptables-allports
 
 
@@ -22,7 +22,7 @@ action = iptables-allports
 
 # Put there localhost and IP addresses of server
 bantime  = 604800
-findtime  = 86400
+findtime = 86400
 maxretry = 3
 #
 # ENABLED JAILS
