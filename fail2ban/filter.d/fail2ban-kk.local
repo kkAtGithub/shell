@@ -1,0 +1,6 @@
+[Definition]
+failregex = \[.*\] <HOST>.*: From a region where it is not allowed
+ignoreregex =
+
+[Init]
+datepattern = %%Y/%%m/%%d %%H:%%M:%%S
