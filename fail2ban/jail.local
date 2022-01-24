@@ -1,0 +1,28 @@
+#
+#: info: This is modified Fail2Ban configuration file for Securix GNU/Linux
+#: file: /etc/fail2ban/jail.local
+#: howto: change "enabled" to "true" and check that log file exist
+#: make your changes in this file only
+#
+# For more information and examples please check jail.conf
+#
+[sshd]
+enabled = true
+action = iptables-allports
+
+[frps-kk]
+enabled = true
+filter = frps-kk
+logpath = /root/docker/fail2ban-kk/log/fail2ban-kk.log
+action = iptables-allports
+
+
+[DEFAULT]
+
+# Put there localhost and IP addresses of server
+bantime  = 604800
+findtime  = 86400
+maxretry = 3
+#
+# ENABLED JAILS
+#
