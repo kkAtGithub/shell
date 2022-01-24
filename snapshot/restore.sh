@@ -42,6 +42,7 @@ if [ -f "/root/backup/service/docker.service" ]; then
     /root/shell/misc/iptables_config.sh -c
 fi
 
+journalctl --vacuum-time=1w
 apt-get autoremove -y
 
 exit 0
