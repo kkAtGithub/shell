@@ -2,7 +2,7 @@
 
 apt-get install fail2ban inetutils-syslogd -y
 
-/bin/cp -rf /root/shell/fail2ban/ /etc/fail2ban/
+/bin/cp -rf /root/shell/fail2ban/* /etc/fail2ban/
 
 systemctl enable fail2ban && \
 systemctl restart fail2ban
