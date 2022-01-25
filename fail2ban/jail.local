@@ -12,7 +12,7 @@ enabled = true
 action = iptables-dropall
 
 [frps-kk]
-enabled = true
+enabled = false
 filter = frps-kk
 logpath = /root/docker/fail2ban-kk/log/frps.log
 action = iptables-dropall
