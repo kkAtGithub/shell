@@ -29,13 +29,13 @@ if [ -f "/root/backup/conf/hosts" ]; then
 fi
 
 if [ -f "/root/backup/service/docker.service" ]; then
-    IP_WG99=$(ifconfig wg99|grep inet|awk '{print $2}'|tr -d "addr:")
-    EXEC_START=$(cat /etc/systemd/system/docker.service | grep "ExecStart")
+#     IP_WG99=$(ifconfig wg99|grep inet|awk '{print $2}'|tr -d "addr:")
+#     EXEC_START=$(cat /etc/systemd/system/docker.service | grep "ExecStart")
     /root/shell/init/docker_setup.sh
     /bin/cp -rf /root/backup/service/docker.service /etc/systemd/system/docker.service
-    if [[ ! $EXEC_START =~ $IP_WG99 ]]; then
-        sed -i "s#$EXEC_START#$EXEC_START -H tcp://$IP_WG99:2375#g" /etc/systemd/system/docker.service
-    fi
+#     if [[ ! $EXEC_START =~ $IP_WG99 ]]; then
+#         sed -i "s#$EXEC_START#$EXEC_START -H tcp://$IP_WG99:2375#g" /etc/systemd/system/docker.service
+#     fi
     systemctl daemon-reload && \
     systemctl restart docker.service && \
     systemctl restart docker-stack.service
