@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do apt-get remove $pkg; done
 
 apt-get update && \
 apt-get install \
@@ -25,14 +25,14 @@ MACHINE=$(uname -m)
 #    pip3 install docker-compose
 #fi
 
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+chmod a+r /etc/apt/keyrings/docker.gpg
 
 echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
   
 (apt-get update && \
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y) || \
@@ -50,12 +50,12 @@ fi
 
 cd /root/docker
 echo "#!/bin/bash" > docker_up.sh && \
-echo "docker-compose -f /root/docker/docker-compose.yml up --remove-orphans -d" >> docker_up.sh && \
+echo "docker compose -f /root/docker/docker-compose.yml up --remove-orphans -d" >> docker_up.sh && \
 echo "exit 0" >> docker_up.sh && \
 chmod 700 docker_up.sh
 
 echo "#!/bin/bash" > docker_down.sh && \
-echo "docker-compose -f /root/docker/docker-compose.yml down --remove-orphans" >> docker_down.sh && \
+echo "docker compose -f /root/docker/docker-compose.yml down --remove-orphans" >> docker_down.sh && \
 echo "exit 0" >> docker_down.sh && \
 chmod 700 docker_down.sh
 
