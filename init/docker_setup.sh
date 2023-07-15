@@ -1,5 +1,7 @@
 #!/bin/bash
 
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
 apt-get update && \
 apt-get install \
     apt-transport-https \
