@@ -26,8 +26,14 @@ systemctl stop fail2ban
 iptables -L
 ip6tables -L
 
+iptables -t nat -F
+iptables -t mangle -F
 iptables -F
+iptables -X
+ip6tables -t nat -F
+ip6tables -t mangle -F
 ip6tables -F
+ip6tables -X
 
 iptables -P INPUT DROP
 ip6tables -P INPUT DROP
