@@ -62,7 +62,7 @@ chmod 700 docker_down.sh
 echo "[Unit]" > /etc/systemd/system/docker-stack.service && \
 echo "Description=Docker stack" >> /etc/systemd/system/docker-stack.service && \
 echo "Wants=network-online.target" >> /etc/systemd/system/docker-stack.service && \
-echo "After=network.target" >> /etc/systemd/system/docker-stack.service && \
+echo "After=docker.service" >> /etc/systemd/system/docker-stack.service && \
 echo "" >> /etc/systemd/system/docker-stack.service && \
 echo "[Service]" >> /etc/systemd/system/docker-stack.service && \
 echo "Type=oneshot" >> /etc/systemd/system/docker-stack.service && \
