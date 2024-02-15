@@ -4,19 +4,18 @@
 
 apt-get update && \
 apt-get full-upgrade -y && \
-apt-get install apt-forktracer -y && \
+#apt-get install apt-forktracer -y && \
 apt-get autoremove -y
 
-ndp=$(apt-forktracer | sort | awk '{print $1}')
+#ndp=$(apt-forktracer | sort | awk '{print $1}')
 
-for package in $ndp
-do
-    apt-get remove $package -y
-done
+#for package in $ndp
+#do
+#    apt-get remove $package -y
+#done
 
-apt-get remove apt-forktracer -y
-
-apt-get autoremove -y
+#apt-get remove apt-forktracer -y
+#apt-get autoremove -y
 
 leftover=$(find /etc -name '*.dpkg-*' -o -name '*.ucf-*' -o -name '*.merge-error')
 
@@ -25,13 +24,19 @@ do
     rm $file
 done
 
-rm /etc/apt/sources.list.d/*
+sed -i 's/bullseye/bookworm/g' /etc/apt/sources.list.d/*
 
-sed -i '/buster/d' /etc/apt/sources.list && \
-echo "deb http://deb.debian.org/debian bullseye main contrib non-free" >> /etc/apt/sources.list && \
-echo "deb http://deb.debian.org/debian bullseye-updates main contrib non-free" >> /etc/apt/sources.list && \
-echo "deb http://security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
-echo "deb http://ftp.debian.org/debian bullseye-backports main contrib non-free" >> /etc/apt/sources.list
+sed -i '/bullseye/d' /etc/apt/sources.list && \
+echo "deb https://ftp.debian.org/debian/ bookworm contrib main non-free non-free-firmware" >> /etc/apt/sources.list && \
+echo "# deb-src https://ftp.debian.org/debian/ bookworm contrib main non-free non-free-firmware" >> /etc/apt/sources.list && \
+echo "deb https://ftp.debian.org/debian/ bookworm-updates contrib main non-free non-free-firmware" >> /etc/apt/sources.list && \
+echo "# deb-src https://ftp.debian.org/debian/ bookworm-updates contrib main non-free non-free-firmware" >> /etc/apt/sources.list && \
+echo "deb https://ftp.debian.org/debian/ bookworm-proposed-updates contrib main non-free non-free-firmware" >> /etc/apt/sources.list && \
+echo "# deb-src https://ftp.debian.org/debian/ bookworm-proposed-updates contrib main non-free non-free-firmware" >> /etc/apt/sources.list && \
+echo "deb https://ftp.debian.org/debian/ bookworm-backports contrib main non-free non-free-firmware" >> /etc/apt/sources.list && \
+echo "# deb-src https://ftp.debian.org/debian/ bookworm-backports contrib main non-free non-free-firmware" >> /etc/apt/sources.list && \
+echo "deb https://security.debian.org/debian-security/ bookworm-security contrib main non-free non-free-firmware" >> /etc/apt/sources.list && \
+echo "# deb-src https://security.debian.org/debian-security/ bookworm-security contrib main non-free non-free-firmware" >> /etc/apt/sources.list
 
 apt-get update && \
 apt-get autoremove -y && \
