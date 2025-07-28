@@ -14,10 +14,16 @@ action = iptables-dropall
 [frps-kk]
 enabled = false
 filter = frps-kk
-logpath = /root/docker/fail2ban-kk/log/frps.log
+logpath = /root/docker/ip-reporter/data/suspicious_ips.log
 action = iptables-dropall
 maxretry = 1
 
+[nginx-ssl-verify]
+enabled = false
+filter = nginx-ssl-verify
+logpath = /root/docker/letsencrypt/config/log/nginx/ssl_client_verify_fail.log
+action = iptables-dropall
+maxretry = 1
 
 [DEFAULT]
 
