@@ -10,6 +10,8 @@
 [sshd]
 enabled = true
 action = iptables-dropall
+logpath = /var/log/auth.log
+backend = auto
 
 [frps-kk]
 enabled = false
